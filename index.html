@@ -621,11 +621,18 @@
     }
   });
 
+  function onRangeChange() {
+    if (!audio.paused && !isRandomPaused) {
+      startRandomPauseTimer();
+    }
+  }
+
   minRange.addEventListener('input', () => {
     let min = parseInt(minRange.value, 10);
     let max = parseInt(maxRange.value, 10);
     if (min > max) { maxRange.value = min; maxValue.textContent = min + 's'; }
     minValue.textContent = min + 's';
+    onRangeChange();
   });
 
   maxRange.addEventListener('input', () => {
@@ -633,6 +640,7 @@
     let max = parseInt(maxRange.value, 10);
     if (max < min) { minRange.value = max; minValue.textContent = max + 's'; }
     maxValue.textContent = max + 's';
+    onRangeChange();
   });
 
   // --- PWA Registration ---
